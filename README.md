@@ -1,109 +1,109 @@
 # Discord RPC
 
-## Deprecation Notice
+## Aviso de Suspensão
 
-This library has been deprecated in favor of Discord's GameSDK. [Learn more here](https://discordapp.com/developers/docs/game-sdk/sdk-starter-guide)
+Esta biblioteca foi preterida em favor do GameSDK do Discord. [Saiba mais aqui](https://discordapp.com/developers/docs/game-sdk/sdk-starter-guide)
 
 ---
 
-This is a library for interfacing your game with a locally running Discord desktop client. It's known to work on Windows, macOS, and Linux. You can use the lib directly if you like, or use it as a guide to writing your own if it doesn't suit your game as is. PRs/feedback welcome if you have an improvement everyone might want, or can describe how this doesn't meet your needs.
+Esta é uma biblioteca para fazer a interface do seu jogo com um cliente de desktop Discord rodando localmente. É conhecido por funcionar no Windows, macOS e Linux. Você pode usar a lib diretamente se quiser, ou usá-la como um guia para escrever a sua própria se ela não se adequar ao seu jogo como está. PRs/feedback são bem-vindos se você tiver uma melhoria que todos possam querer, ou pode descrever como isso não atende às suas necessidades.
 
-Included here are some quick demos that implement the very minimal subset to show current status, and
-have callbacks for where a more complete game would do more things (joining, spectating, etc).
+Estão incluídas aqui algumas demonstrações rápidas que implementam o subconjunto mínimo para mostrar o status atual e
+tem callbacks para onde um jogo mais completo faria mais coisas (juntando-se, assistindo, etc).
 
-## Documentation
+## Documentação
 
-The most up to date documentation for Rich Presence can always be found on our [developer site](https://discordapp.com/developers/docs/rich-presence/how-to)! If you're interested in rolling your own native implementation of Rich Presence via IPC sockets instead of using our SDK—hey, you've got free time, right?—check out the ["Hard Mode" documentation](https://github.com/discordapp/discord-rpc/blob/master/documentation/hard-mode.md).
+A documentação mais atualizada do Rich Presence sempre pode ser encontrada em nosso [site do desenvolvedor](https://discordapp.com/developers/docs/rich-presence/how-to)! Se você estiver interessado em lançar sua própria implementação nativa do Rich Presence por meio de soquetes IPC em vez de usar nosso SDK—hey, você tem tempo livre, certo?—confira a [documentação do "Hard Mode"](https:// github.com/discordapp/discord-rpc/blob/master/documentation/hard-mode.md).
 
-## Basic Usage
+## Uso básico
 
-Zeroith, you should be set up to build things because you are a game developer, right?
+Zeroith, você deveria estar preparado para construir coisas porque você é um desenvolvedor de jogos, certo?
 
-First, head on over to the [Discord developers site](https://discordapp.com/developers/applications/me) and make yourself an app. Keep track of `Client ID` -- you'll need it here to pass to the init function.
+Primeiro, acesse o [site de desenvolvedores do Discord](https://discordapp.com/developers/applications/me) e crie um aplicativo. Acompanhe o `Client ID` -- você precisará dele aqui para passar para a função init.
 
-### Unreal Engine 4 Setup
+### Configuração do Unreal Engine 4
 
-To use the Rich Presense plugin with Unreal Engine Projects:
+Para usar o plug-in Rich Presense com projetos do Unreal Engine:
 
-1.  Download the latest [release](https://github.com/discordapp/discord-rpc/releases) for each operating system you are targeting and the zipped source code
-2.  In the source code zip, copy the UE plugin—`examples/unrealstatus/Plugins/discordrpc`—to your project's plugin directory
-3.  At `[YOUR_UE_PROJECT]/Plugins/discordrpc/source/ThirdParty/DiscordRpcLibrary/`, create an `Include` folder and copy `discord_rpc.h` and `discord_register.h` to it from the zip
-4.  Follow the steps below for each OS
-5.  Build your UE4 project
-6.  Launch the editor, and enable the Discord plugin.
+1. Faça o download da [versão] mais recente (https://github.com/discordapp/discord-rpc/releases) para cada sistema operacional que você está direcionando e o código-fonte compactado
+2. No zip do código-fonte, copie o plugin UE—`examples/unrealstatus/Plugins/discordrpc`—para o diretório de plugins do seu projeto
+3. Em `[YOUR_UE_PROJECT]/Plugins/discordrpc/source/ThirdParty/DiscordRpcLibrary/`, crie uma pasta `Include` e copie `discord_rpc.h` e `discord_register.h` para ela do zip
+4. Siga as etapas abaixo para cada SO
+5. Crie seu projeto UE4
+6. Inicie o editor e ative o plug-in Discord.
 
-#### Windows
+#### Janelas
 
-- At `[YOUR_UE_PROJECT]/Plugins/discordrpc/source/ThirdParty/DiscordRpcLibrary/`, create a `Win64` folder
-- Copy `lib/discord-rpc.lib` and `bin/discord-rpc.dll` from `[RELEASE_ZIP]/win64-dynamic` to the `Win64` folder
+- Em `[YOUR_UE_PROJECT]/Plugins/discordrpc/source/ThirdParty/DiscordRpcLibrary/`, crie uma pasta `Win64`
+- Copie `lib/discord-rpc.lib` e `bin/discord-rpc.dll` de `[RELEASE_ZIP]/win64-dynamic` para a pasta `Win64`
 
 #### Mac
 
-- At `[YOUR_UE_PROJECT]/Plugins/discordrpc/source/ThirdParty/DiscordRpcLibrary/`, create a `Mac` folder
-- Copy `libdiscord-rpc.dylib` from `[RELEASE_ZIP]/osx-dynamic/lib` to the `Mac` folder
+- Em `[YOUR_UE_PROJECT]/Plugins/discordrpc/source/ThirdParty/DiscordRpcLibrary/`, crie uma pasta `Mac`
+- Copie `libdiscord-rpc.dylib` de `[RELEASE_ZIP]/osx-dynamic/lib` para a pasta `Mac`
 
 #### Linux
 
-- At `[YOUR_UE_PROJECT]/Plugins/discordrpc/source/ThirdParty/DiscordRpcLibrary/`, create a `Linux` folder
-- Inside, create another folder `x86_64-unknown-linux-gnu`
-- Copy `libdiscord-rpc.so` from `[RELEASE_ZIP]/linux-dynamic/lib` to `Linux/x86_64-unknown-linux-gnu`
+- Em `[YOUR_UE_PROJECT]/Plugins/discordrpc/source/ThirdParty/DiscordRpcLibrary/`, crie uma pasta `Linux`
+- Dentro, crie outra pasta `x86_64-unknown-linux-gnu`
+- Copie `libdiscord-rpc.so` de `[RELEASE_ZIP]/linux-dynamic/lib` para `Linux/x86_64-unknown-linux-gnu`
 
-### Unity Setup
+### Configuração da unidade
 
-If you're a Unity developer looking to integrate Rich Presence into your game, follow this simple guide to get started towards success:
+Se você é um desenvolvedor do Unity que deseja integrar o Rich Presence ao seu jogo, siga este guia simples para começar a ter sucesso:
 
-1. Download the DLLs for any platform that you need from [our releases](https://github.com/discordapp/discord-rpc/releases)
-2. In your Unity project, create a `Plugins` folder inside your `Assets` folder if you don't already have one
-3. Copy the file `DiscordRpc.cs` from [here](https://github.com/discordapp/discord-rpc/blob/master/examples/button-clicker/Assets/DiscordRpc.cs) into your `Assets` folder. This is basically your header file for the SDK
+1. Baixe as DLLs para qualquer plataforma que você precisar de [nossos lançamentos](https://github.com/discordapp/discord-rpc/releases)
+2. Em seu projeto Unity, crie uma pasta `Plugins` dentro de sua pasta `Assets` se você ainda não tiver uma
+3. Copie o arquivo `DiscordRpc.cs` de [aqui](https://github.com/discordapp/discord-rpc/blob/master/examples/button-clicker/Assets/DiscordRpc.cs) em seu `Assets` pasta. Este é basicamente seu arquivo de cabeçalho para o SDK
 
-We've got our `Plugins` folder ready, so let's get platform-specific!
+Nós temos nossa pasta `Plugins` pronta, então vamos ser específicos da plataforma!
 
-#### Windows
+#### Janelas
 
-4. Create `x86` and `x86_64` folders inside `Assets/Plugins/`
-5. Copy `discord-rpc-win/win64-dynamic/bin/discord-rpc.dll` to `Assets/Plugins/x86_64/`
-6. Copy `discord-rpc-win/win32-dynamic/bin/discord-rpc.dll` to `Assets/Plugins/x86/`
-7. Click on both DLLs and make sure they are targetting the correct architectures in the Unity editor properties pane
-8. Done!
+4. Crie as pastas `x86` e `x86_64` dentro de `Assets/Plugins/`
+5. Copie `discord-rpc-win/win64-dynamic/bin/discord-rpc.dll` para `Assets/Plugins/x86_64/`
+6. Copie `discord-rpc-win/win32-dynamic/bin/discord-rpc.dll` para `Assets/Plugins/x86/`
+7. Clique em ambas as DLLs e certifique-se de que elas estejam direcionando as arquiteturas corretas no painel de propriedades do editor do Unity
+8. Pronto!
 
-#### MacOS
+#### Mac OS
 
-4. Copy `discord-rpc-osx/osx-dynamic/lib/libdiscord-rpc.dylib` to `Assets/Plugins/`
-5. Rename `libdiscord-rpc.dylib` to `discord-rpc.bundle`
-6. Done!
+4. Copie `discord-rpc-osx/osx-dynamic/lib/libdiscord-rpc.dylib` para `Assets/Plugins/`
+5. Renomeie `libdiscord-rpc.dylib` para `discord-rpc.bundle`
+6. Pronto!
 
 #### Linux
 
-4. Copy `discord-rpc-linux/linux-dynamic-lib/libdiscord-rpc.so` to `Assets/Plugins/`
-5. Done!
+4. Copie `discord-rpc-linux/linux-dynamic-lib/libdiscord-rpc.so` para `Assets/Plugins/`
+5. Pronto!
 
-You're ready to roll! For code examples on how to interact with the SDK using the `DiscordRpc.cs` header file, check out [our example](https://github.com/discordapp/discord-rpc/blob/master/examples/button-clicker/Assets/DiscordController.cs)
+Você está pronto para rolar! Para exemplos de código sobre como interagir com o SDK usando o arquivo de cabeçalho `DiscordRpc.cs`, confira [nosso exemplo](https://github.com/discordapp/discord-rpc/blob/master/examples/button-clicker /Assets/DiscordController.cs)
 
-### From package
+### Do pacote
 
-Download a release package for your platform(s) -- they have subdirs with various prebuilt options, select the one you need add `/include` to your compile includes, `/lib` to your linker paths, and link with `discord-rpc`. For the dynamically linked builds, you'll need to ship the associated file along with your game.
+Faça o download de um pacote de lançamento para sua(s) plataforma(s) -- eles têm subdiretórios com várias opções pré-construídas, selecione o que você precisa adicionar `/include` às suas inclusões de compilação, `/lib` aos seus caminhos de linker e vincule com `discord- rpc`. Para as compilações vinculadas dinamicamente, você precisará enviar o arquivo associado junto com o jogo.
 
-### From repo
+### Do repositório
 
-First-eth, you'll want `CMake`. There's a few different ways to install it on your system, and you should refer to [their website](https://cmake.org/install/). Many package managers provide ways of installing CMake as well.
+Primeiro, você vai querer `CMake`. Existem algumas maneiras diferentes de instalá-lo em seu sistema, e você deve consultar o [site deles](https://cmake.org/install/). Muitos gerenciadores de pacotes também fornecem maneiras de instalar o CMake.
 
-To make sure it's installed correctly, type `cmake --version` into your flavor of terminal/cmd. If you get a response with a version number, you're good to go!
+Para ter certeza de que está instalado corretamente, digite `cmake --version` no seu tipo de terminal/cmd. Se você receber uma resposta com um número de versão, pronto!
 
-There's a [CMake](https://cmake.org/download/) file that should be able to generate the lib for you; Sometimes I use it like this:
+Existe um arquivo [CMake](https://cmake.org/download/) que deve ser capaz de gerar a lib para você; Às vezes eu uso assim:
 
 ```sh
-    cd <path to discord-rpc>
-    mkdir build
-    cd build
-    cmake .. -DCMAKE_INSTALL_PREFIX=<path to install discord-rpc to>
+    cd <caminho para discord-rpc>
+    compilação mkdir
+    compilação de cd
+    cmake .. -DCMAKE_INSTALL_PREFIX=<caminho para instalar discord-rpc para>
     cmake --build . --config Release --target install
 ```
 
-There is a wrapper build script `build.py` that runs `cmake` with a few different options.
+Existe um script de construção wrapper `build.py` que executa `cmake` com algumas opções diferentes.
 
-Usually, I run `build.py` to get things started, then use the generated project files as I work on things. It does depend on `click` library, so do a quick `pip install click` to make sure you have it if you want to run `build.py`.
+Normalmente, eu corro `build.py` para começar as coisas, então uso os arquivos de projeto gerados enquanto trabalho nas coisas. Ele depende da biblioteca `click`, então faça um rápido `pip install click` para ter certeza de que você o possui se quiser executar o `build.py`.
 
-There are some CMake options you might care about:
+Existem algumas opções do CMake com as quais você pode se interessar:
 
 | flag                                                                                     | default | does                                                                                                                                                  |
 | ---------------------------------------------------------------------------------------- | ------- | ----------------------------------------------------------------------------------------------------------------------------------------------------- |
@@ -112,41 +112,41 @@ There are some CMake options you might care about:
 | [`BUILD_SHARED_LIBS`](https://cmake.org/cmake/help/v3.7/variable/BUILD_SHARED_LIBS.html) | `OFF`   | Build library as a DLL                                                                                                                                |
 | `WARNINGS_AS_ERRORS`                                                                     | `OFF`   | When enabled, compiles with `-Werror` (on \*nix platforms).                                                                                           |
 
-## Continuous Builds
+## Construções contínuas
 
-Why do we have three of these? Three times the fun!
+Por que temos três desses? Três vezes mais divertido!
 
-| CI                   | badge                                                                                                                                            |
-| -------------------- | ------------------------------------------------------------------------------------------------------------------------------------------------ |
-| TravisCI             | [![Build status](https://travis-ci.org/discordapp/discord-rpc.svg?branch=master)](https://travis-ci.org/discordapp/discord-rpc)                  |
-| AppVeyor             | [![Build status](https://ci.appveyor.com/api/projects/status/qvkoc0w1c4f4b8tj?svg=true)](https://ci.appveyor.com/project/crmarsh/discord-rpc)    |
-| Buildkite (internal) | [![Build status](https://badge.buildkite.com/e103d79d247f6776605a15246352a04b8fd83d69211b836111.svg)](https://buildkite.com/discord/discord-rpc) |
+| CI | emblema |
+| -------------------- | -------------------------------------------------- -------------------------------------------------- -------------------------------------------- |
+| TravisCI | [![Status da compilação](https://travis-ci.org/discordapp/discord-rpc.svg?branch=master)](https://travis-ci.org/discordapp/discord-rpc) |
+| AppVeyor | [![Status da compilação](https://ci.appveyor.com/api/projects/status/qvkoc0w1c4f4b8tj?svg=true)](https://ci.appveyor.com/project/crmarsh/discord-rpc) |
+| Buildkite (interno) | [![Status da compilação](https://badge.buildkite.com/e103d79d247f6776605a15246352a04b8fd83d69211b836111.svg)](https://buildkite.com/discord/discord-rpc) |
 
-## Sample: send-presence
+## Exemplo: presença de envio
 
-This is a text adventure "game" that inits/deinits the connection to Discord, and sends a presence update on each command.
+Este é um "jogo" de aventura de texto que inicia/desinicia a conexão com o Discord e envia uma atualização de presença em cada comando.
 
-## Sample: button-clicker
+## Exemplo: botão de clique
 
-This is a sample [Unity](https://unity3d.com/) project that wraps a DLL version of the library, and sends presence updates when you click on a button. Run `python build.py unity` in the root directory to build the correct library files and place them in their respective folders.
+Este é um projeto de amostra [Unity](https://unity3d.com/) que envolve uma versão DLL da biblioteca e envia atualizações de presença quando você clica em um botão. Execute `python build.py unity` no diretório raiz para construir os arquivos de biblioteca corretos e coloque-os em suas respectivas pastas.
 
-## Sample: unrealstatus
+## Exemplo: unrealstatus
 
-This is a sample [Unreal](https://www.unrealengine.com) project that wraps the DLL version of the library with an Unreal plugin, exposes a blueprint class for interacting with it, and uses that to make a very simple UI. Run `python build.py unreal` in the root directory to build the correct library files and place them in their respective folders.
+Este é um projeto de amostra [Unreal](https://www.unrealengine.com) que envolve a versão DLL da biblioteca com um plug-in Unreal, expõe uma classe blueprint para interagir com ela e usa isso para criar uma interface do usuário muito simples . Execute `python build.py unreal` no diretório raiz para construir os arquivos de biblioteca corretos e coloque-os em suas respectivas pastas.
 
-## Wrappers and Implementations
+## Wrappers e implementações
 
-Below is a table of unofficial, community-developed wrappers for and implementations of Rich Presence in various languages. If you would like to have yours added, please make a pull request adding your repository to the table. The repository should include:
+Abaixo está uma tabela de wrappers não oficiais desenvolvidos pela comunidade e implementações de Rich Presence em vários idiomas. Se você gostaria de ter o seu adicionado, por favor, faça um pull request adicionando seu repositório à tabela. O repositório deve incluir:
 
-- The code
-- A brief ReadMe of how to use it
-- A working example
+- O código
+- Um breve ReadMe de como usá-lo
+- Um exemplo de trabalho
 
 ###### Rich Presence Wrappers and Implementations
 
 | Name                                                                      | Language                          |
 | ------------------------------------------------------------------------- | --------------------------------- |
-| [Discord RPC C#](https://github.com/Lachee/discord-rpc-csharp)            | C#                                |
+| [Discord RPC C++](https://https://github.com/MallowDiscord/discord-rpc/)  | C++                               |
 | [Discord RPC D](https://github.com/voidblaster/discord-rpc-d)             | [D](https://dlang.org/)           |
 | [discord-rpc.jar](https://github.com/Vatuu/discord-rpc 'Discord-RPC.jar') | Java                              |
 | [java-discord-rpc](https://github.com/MinnDevelopment/java-discord-rpc)   | Java                              |
