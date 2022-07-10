@@ -12,7 +12,7 @@ Estão incluídas aqui algumas demonstrações rápidas que implementam o subcon
 tem callbacks para onde um jogo mais completo faria mais coisas (juntando-se, assistindo, etc).
 
 ## Documentação
-
+ 
 A documentação mais atualizada do Rich Presence sempre pode ser encontrada em nosso [site do desenvolvedor](https://discordapp.com/developers/docs/rich-presence/how-to)! Se você estiver interessado em lançar sua própria implementação nativa do Rich Presence por meio de soquetes IPC em vez de usar nosso SDK—hey, você tem tempo livre, certo?—confira a [documentação do "Hard Mode"](https:// github.com/discordapp/discord-rpc/blob/master/documentation/hard-mode.md).
 
 ## Uso básico
