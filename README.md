@@ -21,7 +21,7 @@ Zeroith, você deveria estar preparado para construir coisas porque você é um 
 
 Primeiro, acesse o [site de desenvolvedores do Discord](https://discordapp.com/developers/applications/me) e crie um aplicativo. Acompanhe o `Client ID` -- você precisará dele aqui para passar para a função init.
 
-### Configuração do Unreal Engine 4
+### Configuração do Unreal Engine 4 ㅤㅤㅤㅤㅤㅤ
 
 Para usar o plug-in Rich Presense com projetos do Unreal Engine:
 
