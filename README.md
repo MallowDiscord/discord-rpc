@@ -19,7 +19,7 @@ A documentação mais atualizada do Rich Presence sempre pode ser encontrada em 
 
 Zeroith, você deveria estar preparado para construir coisas porque você é um desenvolvedor de jogos, certo?
 
-Primeiro, acesse o [site de desenvolvedores do Discord](https://discordapp.com/developers/applications/me) e crie um aplicativo. Acompanhe o `Client ID` -- você precisará dele aqui para passar para a função init.
+Primeiro, acesse o [site de desenvolvedores do Discord](https://discordapp.com/developers/applications/me) e crie um aplicativo. Acompanhe o `Client ID` -- você precisará dele aqui para passar para a função init. 
  
 ### Configuração do Unreal Engine 4 ㅤㅤㅤㅤㅤㅤ
 
